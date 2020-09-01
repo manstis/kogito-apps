@@ -7,15 +7,20 @@ const BG_IMAGES_DIRNAME = 'bgimages';
 
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, 'src', 'index.tsx')
+    app: path.resolve(__dirname, 'src', 'index.tsx'),
+    'envelope/envelope': './src/envelope/envelope.ts'
   },
   devServer: {
-    contentBase: path.join(__dirname, 'static')
+    contentBase: [
+      path.join(__dirname, 'static'),
+      path.join(__dirname, 'dist/envelope')
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'index.html'),
-      favicon: 'src/favicon.ico'
+      favicon: 'src/favicon.ico',
+      excludeChunks: ['envelope/envelope']
     }),
     new webpack.EnvironmentPlugin({
       KOGITO_APP_VERSION: 'DEV',
@@ -24,8 +29,8 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        { from: 'static/gwt-editors', to: 'gwt-editors' },
-        { from: 'static/envelope', to: 'envelope' }
+        { from: './static/gwt-editors', to: 'gwt-editors' },
+        { from: './static/envelope', to: './envelope' }
       ]
     })
   ],
@@ -95,7 +100,6 @@ module.exports = {
     ]
   },
   output: {
-    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   },

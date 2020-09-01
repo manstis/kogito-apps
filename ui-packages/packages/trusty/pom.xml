@@ -35,7 +35,7 @@
     </repositories>
 
     <properties>
-        <version.dmn.webapp>7.39.0-SNAPSHOT</version.dmn.webapp>
+        <version.dmn.webapp>7.42.0-SNAPSHOT</version.dmn.webapp>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -66,9 +66,6 @@
                             <filesets>
                                 <fileset>
                                     <directory>${project.basedir}/static/gwt-editors</directory>
-                                </fileset>
-                                <fileset>
-                                    <directory>${project.basedir}/static/envelope</directory>
                                 </fileset>
                             </filesets>
                         </configuration>
@@ -131,22 +128,6 @@
                             <resources>
                                 <resource>
                                     <directory>${project.build.directory}/unpacked/dmn/</directory>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                    <!-- Embedded Editor's default envelope to React-App's public path -->
-                    <execution>
-                        <id>copy-envelope</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.basedir}/static/envelope</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${project.build.directory}/../../../node_modules/@kogito-tooling/embedded-editor/dist/envelope</directory>
                                 </resource>
                             </resources>
                         </configuration>
